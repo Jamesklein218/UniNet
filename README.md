@@ -23,20 +23,20 @@ Prerequisite:
 
 ### Front-end
 ***Installing dependency***:
-  $ cd source && npm install
+    $ npm install
 
 ***Run on Android***:
-  $ npm run android
+    $ npm run android
 
 ***Log on Android***:
-  $ npm run log:android
+    $ npm run log:android
 
 ### Back-end
 ***Installing dependency***:
-  $ yarn
+    $ yarn
 
 ***Running***: 
-  $ yarn dev
+    $ yarn dev
 
 # Contributor
 - Tran Duy Minh (Team Leader, Mobile): [Github Profile](https://github.com/Mdtr3002A)
