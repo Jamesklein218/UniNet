@@ -28,7 +28,7 @@ Our solution will aim to address the aforementioned three problems, in order to 
 
 <img src="https://github.com/Jamesklein218/UniNet/blob/main/images/usercase.jpg"  width="500">
 
-# Tech Stack
+# Technology
 - **Frontend**: React Native
 - **Backend**: ExpressJS
 - **Google's Services**: 
