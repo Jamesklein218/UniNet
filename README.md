@@ -16,13 +16,13 @@ UniNet is an application that helps students who have difficulty finding informa
 
 ## Architecture
 
-![General Architecture](https://github.com/Jamesklein218/UniNet/blob/main/images/architecture.png)
+![General Architecture](https://github.com/Jamesklein218/UniNet/blob/main/images/architecture.png | width=500)
 
-![Service Architecture](https://github.com/Jamesklein218/UniNet/blob/main/images/service.png)
+![Service Architecture](https://github.com/Jamesklein218/UniNet/blob/main/images/service.png | width=500)
 
 ## User-case diagram
 
-![User Case Diagram](https://github.com/Jamesklein218/UniNet/blob/main/images/usercase.jpg)
+![User Case Diagram](https://github.com/Jamesklein218/UniNet/blob/main/images/usercase.jpg | width=500)
 
 # Tech Stack
 - **Frontend**: React Native
