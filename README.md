@@ -23,25 +23,24 @@ Prerequisite:
 
 ### Front-end
 ***Installing dependency***:
-    $ npm install
+    ```$ npm install```
 
 ***Run on Android***:
-    $ npm run android
+    ```$ npm run android```
 
 ***Log on Android***:
-    $ npm run log:android
+    ```$ npm run log:android```
 
 ### Back-end
 ***Installing dependency***:
-    $ yarn
+    ```$ yarn```
 
 ***Running***: 
-    $ yarn dev
+    ```$ yarn dev```
 
 # Contributor
 - Tran Duy Minh (Team Leader, Mobile): [Github Profile](https://github.com/Mdtr3002A)
 - Truong Quoc Hung (Back-end): [Github Profile](https://github.com/qhung312)
 - Nguyen Tran Khoi (Mobile): [Github Profile](https://github.com/NooBat)
 - Tran Ngoc Dang Khoa (Mobile): [Github Profile](https://github.com/Jamesklein218)
-
-
+- 
