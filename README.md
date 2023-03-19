@@ -1,5 +1,6 @@
 # UniNet
-> Team: Fessior
+> Team: Fessior*
+> *GDSC Hackathon 2023*
 
 An application! A community!
 
@@ -73,5 +74,3 @@ Prerequisite:
 - Truong Quoc Hung (Back-end): [Github Profile](https://github.com/qhung312)
 - Nguyen Tran Khoi (Mobile): [Github Profile](https://github.com/NooBat)
 - Tran Ngoc Dang Khoa (Mobile): [Github Profile](https://github.com/Jamesklein218)
-
-*GDSC Hackathon 2023*
