@@ -25,8 +25,6 @@ Our solution will aim to address the aforementioned three problems, in order to 
 
 ## User-case diagram
 
-![User Case Diagram](https://github.com/Jamesklein218/UniNet/blob/main/images/usercase.jpg | width=500)
-
 <img src="https://github.com/Jamesklein218/UniNet/blob/main/images/usercase.jpg"  width="500">
 
 # Technology
