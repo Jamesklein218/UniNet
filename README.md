@@ -31,7 +31,9 @@ UniNet is an application that helps students who have difficulty finding informa
 - **Backend**: ExpressJS
 - **Google's Services**: 
   - Firebase Cloud Messaging (FCM) is a cross-platform messaging solution that lets you reliably send messages at no cost.
-  - ...
+  - Google Cloud for service hosting
+  - Firebase Storage for storing files like .pdf and .docs file (In development)
+  - Firebase Hosting for admin webpage (In development)
 
 # Installation
 Prerequisite:
