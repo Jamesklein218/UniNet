@@ -90,26 +90,6 @@ export default function EventFormCreate(props) {
     return true;
   };
 
-  // const GooglePlacesInput = () => {
-  //   return (
-  //     <GooglePlacesAutocomplete
-  //       placeholder="Search"
-  //       onPress={(data, details = null) => {
-  //         // 'details' is provided when fetchDetails = true
-  //         console.log('Change');
-  //         console.log(data, details);
-  //       }}
-  //       fetchDetails={true}
-  //       onFail={(err) => console.log(err)}
-  //       currentLocation={true}
-  //       query={{
-  //         key: 'AIzaSyCot56wWh3R96fs3l-SHLyCNS9Zv8SsrxU',
-  //         language: 'en',
-  //       }}
-  //     />
-  //   );
-  // };
-
   /**
    * @description Call when add Payment
    */
@@ -270,7 +250,7 @@ export default function EventFormCreate(props) {
               onPress={(data, details = null) => {
                 console.log('PLaces API test', data, details);
               }}
-              minLength={10}
+              minLength={5}
               query={{
                 key: Config.GOOGLE_MAPS_API_KEY,
                 language: 'vn',
@@ -290,12 +270,12 @@ export default function EventFormCreate(props) {
                   backgroundColor: colors.card,
                   fontFamily: 'Raleway',
                   flex: 1,
-                  height: '100%',
+                  // height: '100%',
                   color: colors.text,
-                  paddingTop: 5,
-                  paddingBottom: 5,
                 },
               }}
+              fetchDetails={true}
+              onFail={err => console.log('ERROR', err)}
             />
           </View>
 
@@ -309,10 +289,6 @@ export default function EventFormCreate(props) {
             />
           </View>
         </ScrollView>
-        {/* <View style={{marginTop: 10, flex: 1}}>
-          <Text body2>Places</Text>
-          <GooglePlacesInput></GooglePlacesInput>
-        </View> */}
         <View style={{paddingVertical: 15, paddingHorizontal: 20}}>
           <Text style={{color: 'red'}}>{errorMsg}</Text>
           <Button full onPress={() => onPress()}>
