@@ -31,7 +31,7 @@ export const ROLES = {
 };
 
 export const BaseSetting = {
-  name: 'UniNet',
+  name: 'FelixPro',
   displayName: 'UniNet',
   appVersion: '1.0.0',
   defaultLanguage: 'en',
