@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {BaseColor, useTheme, useFont} from '@config';
 import {useTranslation} from 'react-i18next';
 import messaging from '@react-native-firebase/messaging';
@@ -45,6 +45,7 @@ import ParticipantAdd from '@screens/ParticipantAdd';
 import PDFList from '@screens/PDFList';
 import PDF from '@screens/PDF';
 import {useNavigation} from '@react-navigation/native';
+import * as actionTypes from '@actions/actionTypes';
 
 const MainStack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -54,6 +55,10 @@ export default function Main() {
   const login = auth.login.success;
   const navigation = useNavigation();
   const [initialRoute, setInitialRoute] = useState('BottomTabNavigator');
+
+  const {eventId, index} = useSelector(state => state.notification);
+
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     messaging().onNotificationOpenedApp(({data}) => {
@@ -67,6 +72,15 @@ export default function Main() {
         setInitialRoute(data.type);
       }
     });
+
+    // dispatch({
+    //   type: actionTypes.CHANGE_NOTI_EVENTID,
+    //   payload: 'eventId',
+    // });
+    // dispatch({
+    //   type: actionTypes.CHANGE_NOTI_INDEX,
+    //   payload: 0 /*index*/,
+    // });
   }, [navigation, login]);
 
   return (
