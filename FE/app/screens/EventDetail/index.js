@@ -24,6 +24,7 @@ import {EventActions} from '@actions';
 import styles from './styles';
 import _ from 'lodash';
 import {useDispatch, useSelector} from 'react-redux';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
 export default function EventDetail(props) {
   const {navigation} = props;
@@ -32,6 +33,12 @@ export default function EventDetail(props) {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const me = useSelector(state => state.auth.profile);
+  const [region] = useState({
+    latitude: 10.772075,
+    longitude: 106.6572839,
+    latitudeDelta: 0.009,
+    longitudeDelta: 0.004,
+  });
 
   const [heightHeader, setHeightHeader] = useState(Utils.heightHeader());
   const [loadMoreDescription, setLoadMoreDescription] = useState(false);
@@ -48,7 +55,7 @@ export default function EventDetail(props) {
     // dispatch(ApplicationActions.onShowLoading());
     EventActions.getEventById(eventId)
       .then(res => {
-        console.log('Get Open Event Detail successful', res);
+        console.log('Get Open Event Detail successful', res.data);
         setEvent(res.data);
         setRelatedEvent([]);
         console.log(res.data);
@@ -384,11 +391,8 @@ export default function EventDetail(props) {
                   Utils.formatTime(event.information.eventStart)
                 : t('update_later')}
             </Text>
-            {/* <Text body2 semibold style={styles.text}>
+            <Text body2 semibold style={styles.text}>
               {t('location')}
-            </Text>
-            <Text body2 grayColor style={styles.text}>
-              {t('update_later')}
             </Text>
             <View style={{...styles.text, height: 180}}>
               <MapView
@@ -398,12 +402,12 @@ export default function EventDetail(props) {
                 onRegionChange={() => {}}>
                 <Marker
                   coordinate={{
-                    latitude: 1.352083,
-                    longitude: 103.819839,
+                    latitude: 10.772205,
+                    longitude: 106.6572839,
                   }}
                 />
               </MapView>
-            </View> */}
+            </View>
             <Text body2 semibold style={styles.text}>
               {t('unit_held')}
             </Text>
