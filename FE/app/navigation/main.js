@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector} from 'react-redux';
 import {BaseColor, useTheme, useFont} from '@config';
 import {useTranslation} from 'react-i18next';
+import messaging from '@react-native-firebase/messaging';
 import {Icon} from '@components';
 import Community from '@screens/Community';
 import Notification from '@screens/Notification';
@@ -43,6 +44,7 @@ import EventDetailConfirm from '@screens/EventDetailConfirm';
 import ParticipantAdd from '@screens/ParticipantAdd';
 import PDFList from '@screens/PDFList';
 import PDF from '@screens/PDF';
+import {useNavigation} from '@react-navigation/native';
 
 const MainStack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -50,13 +52,29 @@ const BottomTab = createBottomTabNavigator();
 export default function Main() {
   const auth = useSelector(state => state.auth);
   const login = auth.login.success;
+  const navigation = useNavigation();
+  const [initialRoute, setInitialRoute] = useState('BottomTabNavigator');
+
+  useEffect(() => {
+    messaging().onNotificationOpenedApp(({data}) => {
+      if (login && data && data.type && navigation) {
+        navigation.navigate(data.type, {eventId: data.eventId, index: 0});
+      }
+    });
+
+    messaging().getInitialNotification(({data}) => {
+      if (login && data && data.type) {
+        setInitialRoute(data.type);
+      }
+    });
+  }, [navigation, login]);
 
   return (
     <MainStack.Navigator
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName={login ? 'BottomTabNavigator' : 'Walkthrough'}>
+      initialRouteName={login ? initialRoute : 'Walkthrough'}>
       {login ? (
         <>
           <MainStack.Screen
