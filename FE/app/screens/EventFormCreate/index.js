@@ -24,7 +24,8 @@ import {channingActions} from '@utils';
 import {EventActions} from '@actions';
 import {useDispatch} from 'react-redux';
 import {ApplicationActions} from '@actions';
-// import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import Config from 'react-native-config';
 
 export default function EventFormCreate(props) {
   const {navigation} = props;
@@ -191,7 +192,9 @@ export default function EventFormCreate(props) {
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}
         keyboardVerticalOffset={offsetKeyboard}
         style={{flex: 1}}>
-        <ScrollView contentContainerStyle={{padding: 20, paddingTop: 10}}>
+        <ScrollView
+          contentContainerStyle={{padding: 20, paddingTop: 10}}
+          keyboardShouldPersistTaps={'handled'}>
           <View>
             <Text body2>{t('title')}</Text>
             <TextInput
@@ -257,6 +260,42 @@ export default function EventFormCreate(props) {
               success={true}
               value={description}
               multiline={true}
+            />
+          </View>
+
+          <View style={{marginTop: 10}}>
+            <Text body2>Location</Text>
+            <GooglePlacesAutocomplete
+              placeholder="Search"
+              onPress={(data, details = null) => {
+                console.log('PLaces API test', data, details);
+              }}
+              minLength={10}
+              query={{
+                key: Config.GOOGLE_MAPS_API_KEY,
+                language: 'vn',
+                components: 'country:vn',
+              }}
+              styles={{
+                textInputContainer: {
+                  backgroundColor: colors.card,
+                  height: 46,
+                  borderRadius: 5,
+                  width: '100%',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                },
+                textInput: {
+                  backgroundColor: colors.card,
+                  fontFamily: 'Raleway',
+                  flex: 1,
+                  height: '100%',
+                  color: colors.text,
+                  paddingTop: 5,
+                  paddingBottom: 5,
+                },
+              }}
             />
           </View>
 

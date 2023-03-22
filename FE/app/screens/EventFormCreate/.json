@@ -1,0 +1,101 @@
+{
+  "description": "Trường Đại học Bách Khoa - Đại học Đà Nẵng, Nguyễn Lương Bằng, Hòa Khánh Bắc, Liên Chiểu, Da Nang, Vietnam",
+  "matched_substrings": [
+    {
+      "length": 42,
+      "offset": 0
+    }
+  ],
+  "place_id": "ChIJRZX_jdYYQjERLCmn8-lhRXE",
+  "reference": "ChIJRZX_jdYYQjERLCmn8-lhRXE",
+  "structured_formatting": {
+    "main_text": "Trường Đại học Bách Khoa - Đại học Đà Nẵng",
+    "main_text_matched_substrings": [
+      [Object
+      ]
+    ],
+    "secondary_text": "Nguyễn Lương Bằng, Hòa Khánh Bắc, Liên Chiểu, Da Nang, Vietnam"
+  },
+  "terms": [
+    {
+      "offset": 0,
+      "value": "Trường Đại học Bách Khoa - Đại học Đà Nẵng"
+    },
+    {
+      "offset": 44,
+      "value": "Nguyễn Lương Bằng"
+    },
+    {
+      "offset": 63,
+      "value": "Hòa Khánh Bắc"
+    },
+    {
+      "offset": 78,
+      "value": "Liên Chiểu"
+    },
+    {
+      "offset": 90,
+      "value": "Da Nang"
+    },
+    {
+      "offset": 99,
+      "value": "Vietnam"
+    }
+  ],
+  "types": [
+    "university",
+    "university",
+    "point_of_interest",
+    "establishment"
+  ]
+} {
+  "description": "Trường Đại học Bách Khoa - Đại học Đà Nẵng, Nguyễn Lương Bằng, Hòa Khánh Bắc, Liên Chiểu, Da Nang, Vietnam",
+  "matched_substrings": [
+    {
+      "length": 42,
+      "offset": 0
+    }
+  ],
+  "place_id": "ChIJRZX_jdYYQjERLCmn8-lhRXE",
+  "reference": "ChIJRZX_jdYYQjERLCmn8-lhRXE",
+  "structured_formatting": {
+    "main_text": "Trường Đại học Bách Khoa - Đại học Đà Nẵng",
+    "main_text_matched_substrings": [
+      [Object
+      ]
+    ],
+    "secondary_text": "Nguyễn Lương Bằng, Hòa Khánh Bắc, Liên Chiểu, Da Nang, Vietnam"
+  },
+  "terms": [
+    {
+      "offset": 0,
+      "value": "Trường Đại học Bách Khoa - Đại học Đà Nẵng"
+    },
+    {
+      "offset": 44,
+      "value": "Nguyễn Lương Bằng"
+    },
+    {
+      "offset": 63,
+      "value": "Hòa Khánh Bắc"
+    },
+    {
+      "offset": 78,
+      "value": "Liên Chiểu"
+    },
+    {
+      "offset": 90,
+      "value": "Da Nang"
+    },
+    {
+      "offset": 99,
+      "value": "Vietnam"
+    }
+  ],
+  "types": [
+    "university",
+    "university",
+    "point_of_interest",
+    "establishment"
+  ]
+}
