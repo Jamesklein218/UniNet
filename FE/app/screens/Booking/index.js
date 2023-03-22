@@ -49,7 +49,7 @@ export default function Activity(props) {
       activeColor={colors.text}
       renderLabel={({route, focused, color}) => (
         <View style={{flex: 1, alignItems: 'center', width: 100}}>
-          <Text headline semibold={focused} style={{color}}>
+          <Text headline semibold={focused} style={{color, fontSize: 14}}>
             {route.title}
           </Text>
         </View>

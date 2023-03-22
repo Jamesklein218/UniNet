@@ -3,7 +3,7 @@ import {Images} from '@config';
 const PostData = [
   {
     id: '1',
-    image: Images.trip1,
+    image: Images.post1,
     title: 'Overseas Adventure Travel In Nepal',
     description:
       'Andaz Tokyo Toranomon Hills is one of the newest luxury hotels in Tokyo. Located in one of the uprising areas of Tokyo',
@@ -14,7 +14,7 @@ const PostData = [
   },
   {
     id: '2',
-    image: Images.trip2,
+    image: Images.post2,
     title: '50 Really Good Place For This Summer',
     description:
       'Andaz Tokyo Toranomon Hills is one of the newest luxury hotels in Tokyo. Located in one of the uprising areas of Tokyo',
@@ -25,7 +25,7 @@ const PostData = [
   },
   {
     id: '3',
-    image: Images.trip3,
+    image: Images.post3,
     title: 'Overseas Adventure Travel In Nepal',
     description:
       'Andaz Tokyo Toranomon Hills is one of the newest luxury hotels in Tokyo. Located in one of the uprising areas of Tokyo',
@@ -36,7 +36,7 @@ const PostData = [
   },
   {
     id: '4',
-    image: Images.trip4,
+    image: Images.post4,
     title: '50 Really Good Place For This Summer',
     description:
       'Andaz Tokyo Toranomon Hills is one of the newest luxury hotels in Tokyo. Located in one of the uprising areas of Tokyo',

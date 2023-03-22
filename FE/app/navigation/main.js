@@ -169,7 +169,7 @@ function BottomTabNavigator() {
         tabBarActiveTintColor: colors.primary,
         headerShown: false,
         tabBarLabelStyle: {
-          fontSize: 12,
+          fontSize: 10,
           fontFamily: font,
           paddingBottom: 2,
         },

@@ -130,8 +130,20 @@ export default function Home({navigation}) {
       image: Images.chemistry,
     },
     {
+      title: 'Biology',
+      image: Images.biology,
+    },
+    {
+      title: 'Civil Engineer',
+      image: Images.civilEngineer,
+    },
+    {
       title: 'Management',
       image: Images.management,
+    },
+    {
+      title: 'Economics',
+      image: Images.economic,
     },
   ];
 
@@ -241,7 +253,7 @@ export default function Home({navigation}) {
                   {/* Up Coming Events */}
                   <View style={styles.titleView}>
                     <Text title3 semibold>
-                      Up Coming Events
+                      Upcoming Events
                     </Text>
                   </View>
                   <FlatList
