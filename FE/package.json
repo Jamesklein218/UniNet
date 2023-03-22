@@ -19,6 +19,7 @@
     "react-native-blob-util": "^0.16.0",
     "react-native-calendars": "1.1276.0",
     "react-native-camera": "^4.2.1",
+    "react-native-config": "^1.5.0",
     "react-native-date-picker": "^4.2.2",
     "react-native-document-picker": "^8.1.4",
     "react-native-fast-image": "8.5.11",

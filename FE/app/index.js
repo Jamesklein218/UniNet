@@ -11,7 +11,6 @@ console.disableYellowBox = true;
 
 export default function App() {
   useLayoutEffect(() => {
-    console.log('INIT GOOGLE MAP', process.env.REACT_APP_GOOGLE_MAP_API);
     Geocoder.init(process.env.REACT_APP_GOOGLE_MAP_API);
   }, []);
 
