@@ -58,7 +58,7 @@ export default function Main() {
 
   const {eventId, index} = useSelector(state => state.notification);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     messaging().onNotificationOpenedApp(({data}) => {
@@ -70,18 +70,17 @@ export default function Main() {
     messaging().getInitialNotification(({data}) => {
       if (login && data && data.type) {
         setInitialRoute(data.type);
+        dispatch({
+          type: actionTypes.CHANGE_NOTI_EVENTID,
+          payload: data.eventId,
+        });
+        dispatch({
+          type: actionTypes.CHANGE_NOTI_INDEX,
+          payload: 0,
+        });
       }
     });
-
-    // dispatch({
-    //   type: actionTypes.CHANGE_NOTI_EVENTID,
-    //   payload: 'eventId',
-    // });
-    // dispatch({
-    //   type: actionTypes.CHANGE_NOTI_INDEX,
-    //   payload: 0 /*index*/,
-    // });
-  }, [navigation, login]);
+  }, [navigation, login, dispatch]);
 
   return (
     <MainStack.Navigator

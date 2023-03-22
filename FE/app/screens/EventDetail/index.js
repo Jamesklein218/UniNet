@@ -33,12 +33,20 @@ export default function EventDetail(props) {
   const {t} = useTranslation();
   const me = useSelector(state => state.auth.profile);
 
+  eventId = useSelector(state => state.notification.eventId);
+  index = useSelector(state => state.notification.index);
+
+  let eventId, index;
+  if (props.route.params.eventId) {
+    eventId = props.route.params.eventId;
+    index = props.route.params.index;
+  }
+
   const [heightHeader, setHeightHeader] = useState(Utils.heightHeader());
   const [loadMoreDescription, setLoadMoreDescription] = useState(false);
   const [numOfLines, setNumOfLines] = useState(0);
   const [event, setEvent] = useState(null);
   const [relatedEvent, setRelatedEvent] = useState([]);
-  const {eventId, index} = props.route.params;
   useEffect(() => {
     onRefresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,7 +60,7 @@ export default function EventDetail(props) {
         setEvent(res.data);
         setRelatedEvent([]);
         console.log(res.data);
-        console.log('rôle', res.data.participantRole);
+        console.log('role', res.data.participantRole);
         // dispatch(ApplicationActions.onHideLoading());
       })
       .catch(err => {
