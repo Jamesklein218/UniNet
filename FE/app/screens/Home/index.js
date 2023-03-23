@@ -49,27 +49,11 @@ export default function Home({navigation}) {
 
     void onAppBootstrap();
 
-    getWaitingEvent();
-
     return messaging().onTokenRefresh(async token => {
       const data = await AuthAPI.registerDeviceToken(token);
       await AuthAPI.registerUserToDeviceToken(data.payload);
     });
   }, []);
-
-  const getWaitingEvent = () => {
-    if (me?.role && _.find(me.role, item => item === 'CENSOR')) {
-      EventActions.getWaitingEvent()
-        .then(res => {
-          console.log('Get waiting event successful', res);
-          setwaitingEvent(res.data.payload);
-          console.log(res.data.payload[0]);
-        })
-        .catch(err => {
-          console.log('Error in get waiting event', err);
-        });
-    }
-  };
 
   let [icons] = useState([
     {
@@ -156,6 +140,22 @@ export default function Home({navigation}) {
     }, []),
   );
 
+  const isCensor = me?.role && _.find(me.role, item => item === 'CENSOR');
+
+  const getWaitingEvent = () => {
+    if (isCensor) {
+      EventActions.getWaitingEvent()
+        .then(res => {
+          console.log('Get waiting event successful', res);
+          setwaitingEvent(res.data.payload);
+          console.log(res.data.payload[0]);
+        })
+        .catch(err => {
+          console.log('Error in get waiting event', err);
+        });
+    }
+  };
+
   const onRefresh = () => {
     setRefreshing(true);
     dispatch(
@@ -174,6 +174,7 @@ export default function Home({navigation}) {
         })();
       }),
     );
+    getWaitingEvent();
   };
 
   return (
@@ -225,31 +226,38 @@ export default function Home({navigation}) {
               <View style={{marginTop: 180}}>
                 <View>
                   {/* Verify Event */}
-                  <View style={styles.titleView}>
-                    <Text title3 semibold>
-                      Verify Event (For Censor Only)
-                    </Text>
-                  </View>
-                  <FlatList
-                    contentContainerStyle={{paddingLeft: 5, paddingRight: 20}}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    data={waitingEvent}
-                    keyExtractor={(item, index) => item.id}
-                    renderItem={({item, index}) => (
-                      <EventCard
-                        title={item.information.title}
-                        time={item.submitAt}
-                        onPress={() =>
-                          navigation.navigate('VerificationDetail', {
-                            event: item,
-                          })
-                        }
-                        style={{marginLeft: 15}}
-                        image={item.media.origin}
+                  {isCensor && (
+                    <>
+                      <View style={styles.titleView}>
+                        <Text title3 semibold>
+                          Verify Event (For Censor Only)
+                        </Text>
+                      </View>
+                      <FlatList
+                        contentContainerStyle={{
+                          paddingLeft: 5,
+                          paddingRight: 20,
+                        }}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        data={waitingEvent}
+                        keyExtractor={(item, index) => item.id}
+                        renderItem={({item, index}) => (
+                          <EventCard
+                            title={item.information.title}
+                            time={item.submitAt}
+                            onPress={() =>
+                              navigation.navigate('VerificationDetail', {
+                                event: item,
+                              })
+                            }
+                            style={{marginLeft: 15}}
+                            image={item.media.origin}
+                          />
+                        )}
                       />
-                    )}
-                  />
+                    </>
+                  )}
                   {/* Up Coming Events */}
                   <View style={styles.titleView}>
                     <Text title3 semibold>
