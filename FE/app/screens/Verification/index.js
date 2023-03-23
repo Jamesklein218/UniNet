@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {RefreshControl, View, Animated} from 'react-native';
-import {BaseStyle, useTheme} from '@config';
+import {BaseStyle, useTheme, Images} from '@config';
 import {
   Header,
   SafeAreaView,
@@ -136,7 +136,8 @@ export default function Verification(props) {
               renderItem={({item, index}) => (
                 <VerificationItem
                   block
-                  image={item.media.origin}
+                  // image={item.media.origin}
+                  image={Images[`event${3}`]}
                   author={item.userCreated}
                   status={item.verifyStatus}
                   title={item.information.title}
