@@ -141,21 +141,21 @@ export default function ForumDetail(props) {
               {t('feature_post')}
             </Text>
             <PostListItem
-              title="See The Unmatched"
-              description="Diffie on Friday announced he had contracted the coronavirus, becoming the first country star to go public with such a diagnosis."
+              title="Studying Café"
+              description="Want to find a quiet place to study. Check out these coffee shops near HCMUT"
               style={{marginTop: 10, width: '100%'}}
-              image={Images.trip9}
+              image={Images.post5}
               onPress={() => {
-                navigation.navigate('Post');
+                navigation.navigate('Forum');
               }}
             />
             <PostListItem
-              description="Diffie on Friday announced he had contracted the coronavirus, becoming the first country star to go public with such a diagnosis."
-              title="Top 15 Things Must To Do"
+              description="Check out 15 Awesome things you must try when attending military training"
+              title="Top 15 Things To Do"
               style={{marginTop: 10, width: '100%'}}
-              image={Images.trip8}
+              image={Images.post6}
               onPress={() => {
-                navigation.navigate('Post');
+                navigation.navigate('Forum');
               }}
             />
           </View>
