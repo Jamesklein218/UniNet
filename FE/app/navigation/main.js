@@ -188,7 +188,7 @@ function BottomTabNavigator() {
         name="Booking"
         component={Booking}
         options={{
-          title: t('Event'),
+          title: t('activity'),
           tabBarIcon: ({color}) => {
             return <Icon color={color} name="bookmark" size={20} solid />;
           },

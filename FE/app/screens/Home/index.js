@@ -229,8 +229,8 @@ export default function Home({navigation}) {
                   {isCensor && (
                     <>
                       <View style={styles.titleView}>
-                        <Text title3 semibold>
-                          Verify Event (For Censor Only)
+                        <Text title3 semibold style={{fontSize: 18}}>
+                          Verify Activity (For Censor Only)
                         </Text>
                       </View>
                       <FlatList
@@ -261,7 +261,7 @@ export default function Home({navigation}) {
                   {/* Up Coming Events */}
                   <View style={styles.titleView}>
                     <Text title3 semibold>
-                      Upcoming Events
+                      Upcoming Activities
                     </Text>
                   </View>
                   <FlatList

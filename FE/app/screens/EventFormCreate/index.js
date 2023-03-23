@@ -47,6 +47,7 @@ export default function EventFormCreate(props) {
   const [eventType, setEventType] = useState(0);
   const [urgent, setUrgent] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [activityType, setActivityType] = useState(0);
 
   /**
    * @description Call when reminder option switch on/off
@@ -212,6 +213,18 @@ export default function EventFormCreate(props) {
           <View style={{marginTop: 10}}>
             <EventTypeOption
               label={t('type')}
+              option={[
+                {value: 0, text: 'Event'},
+                {value: 1, text: 'Study Session'},
+              ]}
+              onChange={value => setActivityType(value)}
+              value={activityType}
+            />
+          </View>
+
+          <View style={{marginTop: 10}}>
+            <EventTypeOption
+              label={t('property')}
               option={[
                 {value: 0, text: 'General'},
                 {value: 1, text: 'Chain'},

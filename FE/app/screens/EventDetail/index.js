@@ -427,7 +427,7 @@ export default function EventDetail(props) {
                 : 'Other'}
             </Text>
             <Text body2 semibold style={styles.text}>
-              {t('event_start')}
+              {t('activity_start')}
             </Text>
             <Text body2 grayColor style={styles.text}>
               {event.information.eventStart
@@ -439,7 +439,7 @@ export default function EventDetail(props) {
                 : t('update_later')}
             </Text>
             <Text body2 semibold style={styles.text}>
-              {t('event_end')}
+              {t('activity_end')}
             </Text>
             <Text body2 grayColor style={styles.text}>
               {event.information.eventEnd

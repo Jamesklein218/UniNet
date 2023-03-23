@@ -100,7 +100,7 @@ export default function Activity(props) {
     <SafeAreaView
       style={BaseStyle.safeAreaView}
       forceInset={{top: 'always', bottom: 'always'}}>
-      <Header title={t('event_history')} />
+      <Header title={t('activity_history')} />
       <TabView
         lazy
         navigationState={{index, routes}}
