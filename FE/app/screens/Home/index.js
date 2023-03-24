@@ -2,32 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Animated,
-  TouchableOpacity,
   FlatList,
   RefreshControl,
   ScrollView,
 } from 'react-native';
-import {
-  Image,
-  Text,
-  Icon,
-  HotelItem,
-  Card,
-  Button,
-  SafeAreaView,
-  EventCard,
-} from '@components';
+import {Text, SafeAreaView, EventCard} from '@components';
 import CustomCard from '../../components/CustomCard';
-import {BaseStyle, Images, useTheme} from '@config';
+import {Images, useTheme} from '@config';
 import * as Utils from '@utils';
 import styles from './styles';
-import {useTranslation} from 'react-i18next';
 import {useFocusEffect} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {EventActions} from '@actions';
 import messaging from '@react-native-firebase/messaging';
 import _ from 'lodash';
-import {PromotionData, PostData} from '@data';
+import {PostData} from '@data';
 import {AuthAPI} from '../../api/auth';
 import {ForumAPI} from '@api';
 import {GET_ALL_POST} from '../../actions/actionTypes';

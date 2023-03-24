@@ -1,85 +1,58 @@
-import React, {useMemo, useState} from 'react';
-import {View, Animated, useWindowDimensions} from 'react-native';
-import {BaseStyle, BaseColor, Images, useTheme} from '@config';
-import {Header, SafeAreaView, Icon, Text, Tag} from '@components';
-import {UserData} from '@data';
+import React, {useState} from 'react';
+import {
+  View,
+  Image,
+  ScrollView,
+  Animated,
+  useWindowDimensions,
+} from 'react-native';
+import {BaseColor, Images, useTheme} from '@config';
+import {
+  Header,
+  SafeAreaView,
+  Icon,
+  Text,
+  Button,
+  ProfilePerformance,
+  StarRating,
+} from '@components';
+import * as Utils from '@utils';
 import styles from './styles';
+import {UserData} from '@data';
 import {useTranslation} from 'react-i18next';
-import {launchImageLibrary} from 'react-native-image-picker';
-import {TabBar, TabView} from 'react-native-tab-view';
-import ProfileTab from './ProfileTab';
-import SettingTab from './SettingTab';
-import {useSelector} from 'react-redux';
 
 export default function Profile({navigation}) {
-  const layout = useWindowDimensions();
   const {colors} = useTheme();
+  const deltaY = new Animated.Value(0);
   const {t} = useTranslation();
-  const scrollY = new Animated.Value(0);
+
   const [userData] = useState(UserData[0]);
-  const [photo, setPhoto] = useState(null);
-  const [index, setIndex] = useState(0);
-
-  const me = useSelector(state => state.auth.profile);
-
-  const imageScale = scrollY.interpolate({
-    inputRange: [0, 100],
-    outputRange: [1, 0.5],
-    extrapolate: 'clamp',
-  });
-  const imageTranslateY = scrollY.interpolate({
-    inputRange: [0, 100],
-    outputRange: [-5, 50],
-    extrapolate: 'clamp',
-  });
-
-  const routes = useMemo(
-    () => [
-      {key: 'PROFILE', title: 'Profile'},
-      {key: 'SETTING', title: 'Setting'},
-    ],
-    [],
-  );
-
-  const handleChoosePhoto = () => {
-    launchImageLibrary({noData: true}, response => {
-      console.log(response);
-      if (response) {
-        setPhoto(response);
-      }
-    });
-  };
-  const renderScene = ({route, jumpTo}) => {
-    switch (route.key) {
-      case 'PROFILE':
-        return <ProfileTab navigation={navigation} />;
-      case 'SETTING':
-        return <SettingTab navigation={navigation} />;
-    }
-  };
-
-  const renderTabBar = props => (
-    <TabBar
-      {...props}
-      indicatorStyle={[styles.indicator, {backgroundColor: colors.primary}]}
-      style={[styles.tabbar, {backgroundColor: colors.background}]}
-      tabStyle={styles.tab}
-      inactiveColor={BaseColor.grayColor}
-      activeColor={colors.text}
-      renderLabel={({route, focused, color}) => (
-        <View style={{flex: 1, alignItems: 'center', width: 100}}>
-          <Text headline semibold={focused} style={{color}}>
-            {route.title}
-          </Text>
-        </View>
-      )}
-    />
-  );
+  const [heightHeader, setHeightHeader] = useState(Utils.heightHeader());
+  const heightImageBanner = Utils.scaleWithPixel(240, 1);
+  const marginTopBanner = heightImageBanner - heightHeader + 10;
+  const {height, width} = useWindowDimensions();
+  console.log('in profile');
 
   return (
     <View style={{flex: 1}}>
+      <Animated.Image
+        source={Images.profile2}
+        style={[
+          styles.imgBanner,
+          {
+            height: deltaY.interpolate({
+              inputRange: [
+                0,
+                Utils.scaleWithPixel(180),
+                Utils.scaleWithPixel(180),
+              ],
+              outputRange: [heightImageBanner, heightHeader, heightHeader],
+            }),
+          },
+        ]}
+      />
       <Header
-        title="Profile"
+        title=""
         renderLeft={() => {
           return (
             <Icon
@@ -94,67 +67,61 @@ export default function Profile({navigation}) {
           navigation.goBack();
         }}
       />
-      <SafeAreaView
-        style={BaseStyle.safeAreaView}
-        edges={['right', 'left', 'bottom']}>
-        <View style={[styles.containField, {backgroundColor: colors.card}]}>
-          <View style={styles.contentLeftItem}>
-            <Text title2 semibold>
-              15
-            </Text>
-            <Text caption1 grayColor>
-              Social Days
-            </Text>
-          </View>
+      <SafeAreaView style={{flex: 1}} edges={['right', 'left', 'bottom']}>
+        <ScrollView
+          onScroll={Animated.event([
+            {
+              nativeEvent: {
+                contentOffset: {y: deltaY},
+              },
+            },
+          ])}
+          onContentSizeChange={() => setHeightHeader(Utils.heightHeader())}
+          scrollEventThrottle={8}>
           <View
             style={{
-              flex: 2,
-              alignItems: 'center',
-              justifyContent: 'flex-end',
+              paddingHorizontal: 20,
+              marginTop: marginTopBanner,
             }}>
-            <Animated.Image
-              source={Images.profile2}
-              style={{
-                width: 120,
-                height: 120,
-                borderRadius: 60,
-                position: 'absolute',
-                alignSelf: 'center',
-                bottom: 70,
-                transform: [
-                  {
-                    scale: imageScale,
-                  },
-                  {
-                    translateY: imageTranslateY,
-                  },
-                ],
-              }}
-            />
-            <Text headline semibold numberOfLines={1}>
-              {me.name}
+            <Text title1 semibold>
+              Nguyễn Trần Khôi
             </Text>
-            <Tag primary style={styles.tagFollow} onPress={handleChoosePhoto}>
-              Change Image
-            </Tag>
-          </View>
-          <View style={styles.contentLeftItem}>
-            <Text title2 semibold>
-              3
+            <Text subhead grayColor style={{marginBottom: 9}}>
+              Ho Chi Minh City
             </Text>
-            <Text caption1 grayColor>
-              Posts
+            <View style={{flexDirection: 'row'}}>
+              <StarRating
+                disabled={true}
+                starSize={10}
+                maxStars={5}
+                rating={4.5}
+                selectedStar={rating => {}}
+                fullStarColor={colors.accent}
+              />
+            </View>
+            <Text headline semibold style={{marginTop: 10}}>
+              {t('about_me')}
+            </Text>
+            <Text body2 numberOfLines={5} style={{marginTop: 10}}>
+              Xin chào mọi người, mình là sinh viên năm 2 ngành Khoa học Máy
+              tính tại trường Đại học Bách Khoa, sở thích của mình là hát và
+              code.
             </Text>
           </View>
-        </View>
-        <TabView
-          lazy
-          navigationState={{index, routes}}
-          renderScene={renderScene}
-          renderTabBar={renderTabBar}
-          initialLayout={{width: layout.width}}
-          onIndexChange={i => setIndex(i)}
-        />
+          <ProfilePerformance
+            type="primary"
+            flexDirection="column"
+            style={{margin: 20}}
+            data={userData.performance}
+          />
+          <View
+            style={{
+              paddingHorizontal: 20,
+              paddingBottom: 20,
+            }}>
+            <Button full>{t('follow')}</Button>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     </View>
   );

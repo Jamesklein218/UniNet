@@ -10,6 +10,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import StarRating from './StarRating';
 import ProfileAuthor from './ProfileAuthor';
 import ProfileDetail from './ProfileDetail';
+import ProfilePerformance from './ProfilePerformance';
 import ListThumbCircle from './ListThumbCircle';
 import PostListItem from './PostListItem';
 import PostItem from './PostItem';
@@ -66,6 +67,7 @@ export {
   StarRating,
   ProfileAuthor,
   ProfileDetail,
+  ProfilePerformance,
   PostListItem,
   PostItem,
   Card,
