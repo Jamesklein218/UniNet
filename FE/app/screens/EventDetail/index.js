@@ -127,29 +127,19 @@ export default function EventDetail(props) {
       <>
         <View />
         {!isRegistered ? (
-          <Button
-            onPress={() =>
-              navigation.navigate('Selector', {
-                defaultValue: '',
-                onPress: register,
-                placeholder: 'No Available Slots',
-                option: _.filter(event.participantRole, item => {
-                  console.log('role', item);
-                  return (
-                    item.isPublic && item.registerList.length < item.maxRegister //fix lại
-                  );
-                }).map(item => {
-                  return {
-                    title: item.roleName,
-                    value: item.roleId,
-                  };
-                }),
-              })
-            }>
-            {t('register')}
+          <Button onPress={() => alert('Join successfully')}>
+            Ask To Join
           </Button>
         ) : (
-          <Button onPress={() => unRegister()}>{t('un_register')}</Button>
+          <>
+            <Button onPress={() => unRegister()}>Leave</Button>
+            <Button
+              onPress={() => {
+                navigation.navigate('General');
+              }}>
+              Leave
+            </Button>
+          </>
         )}
       </>
     );
@@ -357,12 +347,6 @@ export default function EventDetail(props) {
             {renderParticipant(event.participant)}
 
             <Text body2 semibold style={styles.text}>
-              {t('title')}
-            </Text>
-            <Text body2 grayColor style={styles.text}>
-              {event.information.title}
-            </Text>
-            <Text body2 semibold style={styles.text}>
               {t('description')}
             </Text>
             <Text
@@ -389,16 +373,24 @@ export default function EventDetail(props) {
                 </Text>
               </TouchableOpacity>
             )}
-            <Text body2 semibold style={styles.text}>
-              {t('date_time')}
-            </Text>
-            <Text body2 grayColor style={styles.text}>
-              {event.information.eventStart
-                ? Utils.formatDate(event.information.eventStart) +
-                  ' at ' +
-                  Utils.formatTime(event.information.eventStart)
-                : t('update_later')}
-            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <Text body2 semibold style={styles.text}>
+                {t('date_time')}
+              </Text>
+              <Text body2 grayColor style={styles.text}>
+                {event.information.eventStart
+                  ? Utils.formatDate(event.information.eventStart) +
+                    ' at ' +
+                    Utils.formatTime(event.information.eventStart)
+                  : t('update_later')}
+              </Text>
+            </View>
+
             <Text body2 semibold style={styles.text}>
               {t('location')}
             </Text>
@@ -416,68 +408,47 @@ export default function EventDetail(props) {
                 />
               </MapView>
             </View>
-            <Text body2 semibold style={styles.text}>
-              {t('unit_held')}
-            </Text>
-            <Text body2 grayColor style={styles.text}>
-              {event.information.unitHeld
-                ? event.information.unitHeld
-                : t('update_later')}
-            </Text>
-            <Text body2 semibold style={styles.text}>
-              {t('type')}
-            </Text>
-            <Text body2 grayColor style={styles.text}>
-              {event.information.type === 0
-                ? 'General'
-                : event.information.type === 1
-                ? 'Chain'
-                : 'Other'}
-            </Text>
-            <Text body2 semibold style={styles.text}>
-              {t('activity_start')}
-            </Text>
-            <Text body2 grayColor style={styles.text}>
-              {event.information.eventStart
-                ? Utils.formatDate(event.information.eventStart) +
-                  ' ' +
-                  t('at') +
-                  ' ' +
-                  Utils.formatTime(event.information.eventStart)
-                : t('update_later')}
-            </Text>
-            <Text body2 semibold style={styles.text}>
-              {t('activity_end')}
-            </Text>
-            <Text body2 grayColor style={styles.text}>
-              {event.information.eventEnd
-                ? Utils.formatDate(event.information.eventEnd) +
-                  ' ' +
-                  t('at') +
-                  ' ' +
-                  Utils.formatTime(event.information.eventEnd)
-                : t('update_later')}
-            </Text>
-            <Text body2 semibold style={styles.text}>
-              {t('form_start')}
-            </Text>
-            <Text body2 grayColor style={styles.text}>
-              {Utils.formatDate(event.information.formStart) +
-                ' ' +
-                t('at') +
-                ' ' +
-                Utils.formatTime(event.information.formStart)}
-            </Text>
-            <Text body2 semibold style={styles.text}>
-              {t('form_close')}
-            </Text>
-            <Text body2 grayColor style={styles.text}>
-              {Utils.formatDate(event.information.formEnd) +
-                ' ' +
-                t('at') +
-                ' ' +
-                Utils.formatTime(event.information.formEnd)}
-            </Text>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <Text body2 semibold style={styles.text}>
+                {t('activity_start')}
+              </Text>
+              <Text body2 grayColor style={styles.text}>
+                {event.information.eventStart
+                  ? Utils.formatDate(event.information.eventStart) +
+                    ' ' +
+                    t('at') +
+                    ' ' +
+                    Utils.formatTime(event.information.eventStart)
+                  : t('update_later')}
+              </Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <Text body2 semibold style={styles.text}>
+                {t('activity_end')}
+              </Text>
+              <Text body2 grayColor style={styles.text}>
+                {event.information.eventEnd
+                  ? Utils.formatDate(event.information.eventEnd) +
+                    ' ' +
+                    t('at') +
+                    ' ' +
+                    Utils.formatTime(event.information.eventEnd)
+                  : t('update_later')}
+              </Text>
+            </View>
+
             <View>
               <Text body2 semibold style={styles.text}>
                 {t('recruitment')}

@@ -225,7 +225,6 @@ export default function Home({navigation}) {
             ListFooterComponent={
               <View style={{marginTop: 180}}>
                 <View>
-                  {/* Verify Event */}
                   {isCensor && (
                     <>
                       <View style={styles.titleView}>
@@ -258,10 +257,9 @@ export default function Home({navigation}) {
                       />
                     </>
                   )}
-                  {/* Up Coming Events */}
                   <View style={styles.titleView}>
                     <Text title3 semibold>
-                      Upcoming Activities
+                      Popular
                     </Text>
                   </View>
                   <FlatList
@@ -289,56 +287,64 @@ export default function Home({navigation}) {
                       />
                     )}
                   />
-                  {/* Popular Post */}
-                  <Text title3 semibold style={styles.titleView}>
-                    Popular Post
-                  </Text>
+                  <View style={styles.titleView}>
+                    <Text title3 semibold>
+                      Today
+                    </Text>
+                  </View>
                   <FlatList
                     contentContainerStyle={{paddingLeft: 5, paddingRight: 20}}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    data={posts}
+                    data={event.eventsNewfeed}
                     keyExtractor={(item, index) => item.id}
                     renderItem={({item, index}) => (
-                      <CustomCard
-                        style={[styles.promotionItem, {marginLeft: 15}]}
-                        image={PostData[index % PostData.length].image}
+                      <EventCard
+                        title={item.information.title}
+                        time={item.information.eventStart * 1000}
+                        description={item.information.description.substring(
+                          0,
+                          50,
+                        )}
                         onPress={() =>
-                          navigation.navigate('ForumDetail', {item, index})
-                        }>
-                        <Text subhead whiteColor>
-                          {`${item.content.substring(0, 20)}...`}
-                        </Text>
-                        <Text title2 whiteColor semibold>
-                          {item.title}
-                        </Text>
-                      </CustomCard>
+                          navigation.navigate('EventDetail', {
+                            eventId: item._id,
+                            index: index,
+                          })
+                        }
+                        style={{marginLeft: 15}}
+                        image={Images[`event${(index % 7) + 1}`]}
+                      />
                     )}
                   />
-                  {/* Popular Material */}
-                  <Text title3 semibold style={styles.titleView}>
-                    Search Your Material
-                  </Text>
+                  <View style={styles.titleView}>
+                    <Text title3 semibold>
+                      This Week
+                    </Text>
+                  </View>
                   <FlatList
                     contentContainerStyle={{paddingLeft: 5, paddingRight: 20}}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    data={materialList}
+                    data={event.eventsNewfeed}
                     keyExtractor={(item, index) => item.id}
                     renderItem={({item, index}) => (
-                      <CustomCard
-                        image={item.image}
-                        style={[styles.tourItem, {marginLeft: 15}]}
-                        onPress={() => {}}>
-                        <View
-                          style={{
-                            background: colors.primary,
-                          }}>
-                          <Text headline whiteColor semibold>
-                            {item.title}
-                          </Text>
-                        </View>
-                      </CustomCard>
+                      <EventCard
+                        title={item.information.title}
+                        time={item.information.eventStart * 1000}
+                        description={item.information.description.substring(
+                          0,
+                          50,
+                        )}
+                        onPress={() =>
+                          navigation.navigate('EventDetail', {
+                            eventId: item._id,
+                            index: index,
+                          })
+                        }
+                        style={{marginLeft: 15}}
+                        image={Images[`event${(index % 7) + 1}`]}
+                      />
                     )}
                   />
                 </View>

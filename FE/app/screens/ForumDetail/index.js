@@ -132,32 +132,6 @@ export default function ForumDetail(props) {
             {/* Comment */}
             <CommentSection key={post._id} postId={post._id} />
             {/* Featured Posts */}
-            <Text
-              headline
-              semibold
-              style={{
-                marginTop: 20,
-              }}>
-              {t('feature_post')}
-            </Text>
-            <PostListItem
-              title="Studying Café"
-              description="Want to find a quiet place to study. Check out these coffee shops near HCMUT"
-              style={{marginTop: 10, width: '100%'}}
-              image={Images.post5}
-              onPress={() => {
-                navigation.navigate('Forum');
-              }}
-            />
-            <PostListItem
-              description="Check out 15 Awesome things you must try when attending military training"
-              title="Top 15 Things To Do"
-              style={{marginTop: 10, width: '100%'}}
-              image={Images.post6}
-              onPress={() => {
-                navigation.navigate('Forum');
-              }}
-            />
           </View>
         </ScrollView>
       </SafeAreaView>

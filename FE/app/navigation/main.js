@@ -208,16 +208,6 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Community"
-        component={Community}
-        options={{
-          title: t('Community'),
-          tabBarIcon: ({color}) => {
-            return <Icon color={color} name="globe-asia" size={20} solid />;
-          },
-        }}
-      />
-      <BottomTab.Screen
         name="Notification"
         component={Notification}
         options={{

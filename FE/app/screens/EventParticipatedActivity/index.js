@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {BaseStyle, BaseColor, useTheme} from '@config';
 import {Header, SafeAreaView, Icon, Text} from '@components';
 import {TabView, TabBar} from 'react-native-tab-view';
@@ -11,6 +11,8 @@ import _ from 'lodash';
 import {useDispatch} from 'react-redux';
 
 import ScanningTab from './ScanningTab';
+import ForumTab from './ForumTab';
+import MaterialTab from './MaterialTab';
 import InformationTab from './InformationTab';
 import AttendanceTab from './AttendanceTab';
 import LeaderTab from './LeaderTab';
@@ -81,7 +83,8 @@ export default function EventParticipatedActivity(props) {
       } else {
         return [
           {key: 'information', title: t('information')},
-          {key: 'attendance', title: t('attendance')},
+          {key: 'forum', title: 'Forum'},
+          {key: 'material', title: 'Material'},
         ];
       }
     }
@@ -173,13 +176,21 @@ export default function EventParticipatedActivity(props) {
             navigation={navigation}
           />
         );
+      case 'forum':
+        return (
+          <ForumTab event={event} jumpTo={jumpTo} navigation={navigation} />
+        );
+      case 'material':
+        return (
+          <MaterialTab event={event} jumpTo={jumpTo} navigation={navigation} />
+        );
     }
   };
 
   return (
     <SafeAreaView style={BaseStyle.safeAreaView} forceInset={{top: 'always'}}>
       <Header
-        title={t('event_activity')}
+        title="Session Detail"
         renderLeft={() => {
           return (
             <Icon
@@ -204,6 +215,31 @@ export default function EventParticipatedActivity(props) {
         renderTabBar={renderTabBar}
         onIndexChange={handleIndexChange}
       />
+      {index == 0 || (
+        <TouchableOpacity
+          onPress={() => {
+            if (index == 1) {
+              navigation.navigate('PostCreate');
+            } else if (index == 2) {
+              navigation.navigate('MaterialCreate');
+            }
+          }}
+          style={{
+            position: 'absolute',
+            right: 20,
+            bottom: 20,
+            width: 50,
+            height: 50,
+            backgroundColor: colors.primary,
+            borderRadius: 100,
+            elevation: 1000,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Icon style={{elevation: 100}} name="plus" size={20} color="#ffff" />
+        </TouchableOpacity>
+      )}
     </SafeAreaView>
   );
 }

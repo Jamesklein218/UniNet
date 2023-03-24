@@ -197,7 +197,7 @@ export default function EventFormCreate(props) {
               onChange={setEventTime}
             />
           </View>
-          <View style={{marginTop: 10}}>
+          {/* <View style={{marginTop: 10}}>
             <Text body2>{t('form_time')}</Text>
             <EventTime
               checkInTitle={t('form_start')}
@@ -208,9 +208,9 @@ export default function EventFormCreate(props) {
               checkOutTime={formEnd}
               onChange={setFormTime}
             />
-          </View>
+          </View> */}
 
-          <View style={{marginTop: 10}}>
+          {/* <View style={{marginTop: 10}}>
             <EventTypeOption
               label={t('type')}
               option={[
@@ -232,9 +232,9 @@ export default function EventFormCreate(props) {
               onChange={value => setEventType(value)}
               value={eventType}
             />
-          </View>
+          </View> */}
 
-          <View style={{marginTop: 20}}>
+          {/* <View style={{marginTop: 20}}>
             <Text body2>{t('unit_held')}</Text>
             <TextInput
               onChangeText={text => setUnitHeld(text)}
@@ -242,7 +242,7 @@ export default function EventFormCreate(props) {
               success={true}
               value={unitHeld}
             />
-          </View>
+          </View> */}
 
           <View style={{marginTop: 10}}>
             <Text body2>{t('description')}</Text>
@@ -265,7 +265,7 @@ export default function EventFormCreate(props) {
               }}
               minLength={5}
               query={{
-                key: Config.GOOGLE_MAPS_API_KEY,
+                key: 'AIzaSyAf4xjXI5tD6R-pm_iktNthXBDYeS3Gilw',
                 language: 'vn',
                 components: 'country:vn',
               }}
@@ -289,6 +289,15 @@ export default function EventFormCreate(props) {
               }}
               fetchDetails={true}
               onFail={err => console.log('ERROR', err)}
+            />
+          </View>
+          <View style={{marginTop: 10}}>
+            <Text body2>Maximum number of participants</Text>
+            <TextInput
+              onChangeText={text => setUnitHeld(text)}
+              placeholder={'Input member limit'}
+              success={true}
+              value={unitHeld}
             />
           </View>
 
