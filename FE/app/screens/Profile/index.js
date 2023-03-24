@@ -20,6 +20,7 @@ import * as Utils from '@utils';
 import styles from './styles';
 import {UserData} from '@data';
 import {useTranslation} from 'react-i18next';
+import Khoi from '../../assets/images/khoi.jpeg';
 
 export default function Profile({navigation}) {
   const {colors} = useTheme();
@@ -36,7 +37,7 @@ export default function Profile({navigation}) {
   return (
     <View style={{flex: 1}}>
       <Animated.Image
-        source={Images.profile2}
+        source={Khoi}
         style={[
           styles.imgBanner,
           {

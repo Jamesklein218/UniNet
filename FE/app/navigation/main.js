@@ -28,6 +28,7 @@ import MaterialDetail from '@screens/MaterialDetail';
 import Home from '@screens/Home';
 import Booking from '@screens/Booking';
 import Profile from '@screens/Profile';
+import Profile2 from '@screens/Profile2';
 import EventVerifiedActivity from '@screens/EventVerifiedActivity';
 import EventCreatedActivity from '@screens/EventCreatedActivity';
 import EventParticipatedActivity from '@screens/EventParticipatedActivity';
@@ -219,6 +220,16 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Profile"
+        component={login ? Profile2 : Walkthrough}
+        options={{
+          title: t('account'),
+          tabBarIcon: ({color}) => {
+            return <Icon solid color={color} name="user-circle" size={20} />;
+          },
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile2"
         component={login ? Profile : Walkthrough}
         options={{
           title: t('account'),

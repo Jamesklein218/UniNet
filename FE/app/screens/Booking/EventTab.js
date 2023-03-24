@@ -26,8 +26,8 @@ export default function EventTab(props) {
   }, []);
 
   const name = [
-    'Ôn thi cuối kỳ 1',
-    'Ôn thi cuối kỳ 2',
+    'Ôn thi cuối học kỳ 1',
+    'Ôn thi cuối học kỳ 2',
     'Hưỡng dẫn bài tập lớn giải tích 1',
   ];
 

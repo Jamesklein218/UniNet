@@ -153,18 +153,12 @@ export default function EventDetail(props) {
       <View key={i}>
         <RegisterRole
           style={styles.text}
-          name={item.roleName}
-          reward={item.socialDay}
+          name={'Participant'}
+          reward={10}
           status={
-            item.registerList.length < item.maxRegister ? (
-              <Text body2 bold lightPrimaryColor>
-                {t('available')}
-              </Text>
-            ) : (
-              <Text body2 bold darkPrimaryColor>
-                {t('full')}
-              </Text>
-            )
+            <Text body2 bold darkPrimaryColor>
+              {t('full')}
+            </Text>
           }
           max_register={item.maxRegister}
           description={item.description}
@@ -346,22 +340,6 @@ export default function EventDetail(props) {
 
             {renderParticipant(event.participant)}
 
-            <Text body2 semibold style={styles.text}>
-              {t('description')}
-            </Text>
-            <Text
-              body2
-              grayColor
-              lineHeight={20}
-              numberOfLines={
-                numOfLines == 0 ? null : loadMoreDescription ? numOfLines : 2
-              }
-              style={styles.text}
-              onTextLayout={onTextLayout}>
-              {event.information.description
-                ? event.information.description
-                : t('update_later')}
-            </Text>
             {numOfLines > 2 && (
               <TouchableOpacity
                 style={{alignItems: 'flex-end'}}

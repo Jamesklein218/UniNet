@@ -148,7 +148,7 @@ export default function InformationTab(props) {
         {/* {renderMedia(event.media)} */}
 
         <Text key={key} title1 semibold numberOfLines={1} style={styles.text}>
-          Ôn thi cuối kỳ 1
+          Ôn thi cuối học kỳ 1
         </Text>
 
         {event.information.description ? (
@@ -194,9 +194,7 @@ export default function InformationTab(props) {
           textSecond="Creator"
           textThird={'khoa.tranngocdang@hcmut.edu.vn'}
           userId={event.userCreated._id}
-          onPress={() =>
-            navigation.navigate('ProfileView', {userInfo: event.userCreated})
-          }
+          onPress={() => navigation.navigate('Profile2')}
         />
         <ProfileDetail
           image={Minh}
@@ -204,9 +202,7 @@ export default function InformationTab(props) {
           textSecond="Member"
           textThird={'minh.tranduy@hcmut.edu.vn'}
           userId={event.userCreated._id}
-          onPress={() =>
-            navigation.navigate('ProfileView', {userInfo: event.userCreated})
-          }
+          onPress={() => navigation.navigate('Profile2')}
         />
         <ProfileDetail
           image={Hung}
@@ -214,9 +210,7 @@ export default function InformationTab(props) {
           textSecond="Member"
           textThird={'hung.truongquoc@hcmut.edu.vn'}
           userId={event.userCreated._id}
-          onPress={() =>
-            navigation.navigate('ProfileView', {userInfo: event.userCreated})
-          }
+          onPress={() => navigation.navigate('Profile2')}
         />
         <ProfileDetail
           image={Khoi}
@@ -224,9 +218,7 @@ export default function InformationTab(props) {
           textSecond="Member"
           textThird={'khoi.nguyentran@hcmut.edu.vn'}
           userId={event.userCreated._id}
-          onPress={() =>
-            navigation.navigate('ProfileView', {userInfo: event.userCreated})
-          }
+          onPress={() => navigation.navigate('Profile2')}
         />
       </ScrollView>
 

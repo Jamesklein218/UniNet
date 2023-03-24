@@ -233,7 +233,7 @@ export default function Home({navigation}) {
                         renderItem={({item, index}) => (
                           <EventCard
                             title={item.information.title}
-                            time={item.submitAt}
+                            time={item.information.eventStart}
                             onPress={() =>
                               navigation.navigate('VerificationDetail', {
                                 event: item,
@@ -260,11 +260,7 @@ export default function Home({navigation}) {
                     renderItem={({item, index}) => (
                       <EventCard
                         title={item.information.title}
-                        time={item.information.eventStart * 1000}
-                        description={item.information.description.substring(
-                          0,
-                          50,
-                        )}
+                        time={item.information.eventStart}
                         onPress={() =>
                           navigation.navigate('EventDetail', {
                             eventId: item._id,
@@ -285,16 +281,12 @@ export default function Home({navigation}) {
                     contentContainerStyle={{paddingLeft: 5, paddingRight: 20}}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    data={event.eventsNewfeed}
+                    data={event.eventsNewfeed.slice(1)}
                     keyExtractor={(item, index) => item.id}
                     renderItem={({item, index}) => (
                       <EventCard
                         title={item.information.title}
-                        time={item.information.eventStart * 1000}
-                        description={item.information.description.substring(
-                          0,
-                          50,
-                        )}
+                        time={item.information.eventStart}
                         onPress={() =>
                           navigation.navigate('EventDetail', {
                             eventId: item._id,
@@ -302,7 +294,7 @@ export default function Home({navigation}) {
                           })
                         }
                         style={{marginLeft: 15}}
-                        image={Images[`event${(index % 7) + 1}`]}
+                        image={Images[`event${(index % 7) + 2}`]}
                       />
                     )}
                   />
@@ -321,10 +313,6 @@ export default function Home({navigation}) {
                       <EventCard
                         title={item.information.title}
                         time={item.information.eventStart * 1000}
-                        description={item.information.description.substring(
-                          0,
-                          50,
-                        )}
                         onPress={() =>
                           navigation.navigate('EventDetail', {
                             eventId: item._id,
