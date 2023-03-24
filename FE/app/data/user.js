@@ -13,9 +13,9 @@ const UserData = [
     about:
       'Andaz Tokyo Toranomon Hills is one of the newest luxury hotels in Tokyo. Located in one of the uprising areas of Tokyo',
     performance: [
-      {value: '97.01%', title: 'Feedback'},
-      {value: '999', title: 'Items'},
-      {value: '120k', title: 'Followers'},
+      {value: '4.5', title: 'Calculus 1'},
+      {value: '3.8', title: 'DSA'},
+      {value: '5', title: 'Fuck'},
     ],
   },
   {
