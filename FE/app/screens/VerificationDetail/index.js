@@ -31,8 +31,8 @@ export default function VerificationDetail(props) {
   const dispatch = useDispatch();
   const [heightHeader, setHeightHeader] = useState(Utils.heightHeader());
   const [region] = useState({
-    latitude: 1.352083,
-    longitude: 103.819839,
+    latitude: 10.772075,
+    longitude: 106.6572839,
     latitudeDelta: 0.009,
     longitudeDelta: 0.004,
   });
@@ -327,8 +327,8 @@ export default function VerificationDetail(props) {
                 onRegionChange={() => {}}>
                 <Marker
                   coordinate={{
-                    latitude: 1.352083,
-                    longitude: 103.819839,
+                    latitude: 10.772075,
+                    longitude: 106.6572839,
                   }}
                 />
               </MapView>
@@ -352,7 +352,7 @@ export default function VerificationDetail(props) {
                 : 'Other'}
             </Text>
             <Text body2 semibold style={styles.text}>
-              {t('event_start')}
+              {t('activity_start')}
             </Text>
             <Text body2 grayColor style={styles.text}>
               {event.information.eventStart
@@ -364,7 +364,7 @@ export default function VerificationDetail(props) {
                 : t('update_later')}
             </Text>
             <Text body2 semibold style={styles.text}>
-              {t('event_end')}
+              {t('activity_end')}
             </Text>
             <Text body2 grayColor style={styles.text}>
               {event.information.eventEnd

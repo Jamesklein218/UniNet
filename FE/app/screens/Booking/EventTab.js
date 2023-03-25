@@ -25,11 +25,17 @@ export default function EventTab(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const renderItem = item => {
+  const name = [
+    'Ôn thi cuối học kỳ 1',
+    'Ôn thi cuối học kỳ 2',
+    'Hưỡng dẫn bài tập lớn giải tích 1',
+  ];
+
+  const renderItem = (item, i) => {
     console.log('a', item);
     return (
       <ActivityBox
-        name={item.information.title}
+        name={name[i % name.length]}
         time={Utils.formatDate(item.information.eventStart)}
         amount={
           t('status') +
@@ -96,7 +102,7 @@ export default function EventTab(props) {
               : event.eventVerifiedHistory.slice().reverse()
           }
           keyExtractor={(item, index) => item._id}
-          renderItem={({item}) => renderItem(item)}
+          renderItem={({item, index}) => renderItem(item, index)}
           refreshing={false}
           refreshControl={
             <RefreshControl

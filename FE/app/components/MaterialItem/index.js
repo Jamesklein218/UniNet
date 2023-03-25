@@ -5,6 +5,7 @@ import {BaseColor, useTheme, Images} from '@config';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
 import styles from './styles';
+import MM from '../../assets/images/mm.png';
 export default function MaterialItem(props) {
   const {t} = useTranslation();
   const {colors} = useTheme();
@@ -14,6 +15,7 @@ export default function MaterialItem(props) {
     style,
     image,
     name,
+    author,
     location,
     price,
     available,
@@ -21,7 +23,7 @@ export default function MaterialItem(props) {
     onPress,
     services,
     rateCount,
-    files,
+    title,
     numReviews,
   } = props;
 
@@ -29,9 +31,9 @@ export default function MaterialItem(props) {
     return (
       <View style={style}>
         <ProfileAuthor
-          image={Images.anonymous}
-          name={'Anonymous'}
-          description={'@anonymous'}
+          image={author}
+          name={title}
+          username={title.toLowerCase()}
           style={{paddingHorizontal: 20}}
         />
         <TouchableOpacity
@@ -46,15 +48,7 @@ export default function MaterialItem(props) {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          {files?.map(item => (
-            <Icon
-              name={`file-${item}`}
-              size={200}
-              // style={{heigth: '100%', size: 200}}
-              style={{padding: 20}}
-              color={colors.primary}
-            />
-          ))}
+          <Image style={styles.imagePost} source={image} />
         </TouchableOpacity>
         <View style={{paddingHorizontal: 20}}>
           <Text title2 semibold style={{marginTop: 5}} numberOfLines={1}>

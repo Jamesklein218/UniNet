@@ -40,7 +40,7 @@ export default function ProfileAuthor(props) {
       </View>
       <View style={[styles.contentRight, styleRight]}>
         <Text caption2 grayColor numberOfLines={1}>
-          {new Date(textRight).toLocaleDateString('vi-VN', options)}
+          {new Date().toLocaleDateString('vi-VN', options)}
         </Text>
       </View>
     </TouchableOpacity>

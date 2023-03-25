@@ -1,0 +1,39 @@
+{
+  "client": [
+    {
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbMZDq_3kDoZiSeakUO7XT4oiiVP88_gg"
+        }
+      ],
+      "client_info": {
+        "android_client_info": {
+          "package_name": "com.uninet"
+        },
+        "mobilesdk_app_id": "1:363283937167:android:4042c7fae5b3fd1397bdfa"
+      },
+      "oauth_client": [
+        {
+          "client_id": "363283937167-786vif53udmrgtkeoeai1fmufg667o5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363283937167-786vif53udmrgtkeoeai1fmufg667o5u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1",
+  "project_info": {
+    "project_id": "gdsc-hackathon-e43e5",
+    "project_number": "363283937167",
+    "storage_bucket": "gdsc-hackathon-e43e5.appspot.com"
+  }
+}

@@ -11,6 +11,10 @@ import {EventActions} from '@actions';
 import {useDispatch} from 'react-redux';
 import {ApplicationActions} from '@actions';
 import {UserData} from '@data';
+import Khoa from '../../assets/images/tndk.jpeg';
+import Minh from '../../assets/images/minh.jpeg';
+import Hung from '../../assets/images/tqh.jpeg';
+import Khoi from '../../assets/images/khoi.jpeg';
 
 export default function InformationTab(props) {
   const {event, onRefresh} = props;
@@ -38,40 +42,7 @@ export default function InformationTab(props) {
   };
 
   const renderBottom = event => {
-    return (
-      <>
-        <View>
-          <Text caption1 semibold grayColor>
-            {t('status')}
-          </Text>
-          <Text title3 primaryColor semibold>
-            {event.eventEnd == 0 ? 'END' : event.eventState}
-          </Text>
-          <Text caption1 semibold grayColor style={{marginTop: 5}}>
-            {t('social_day') + ': ' + event.suggestSocialDay}
-          </Text>
-        </View>
-        {Date.now() < event.information.formEnd &&
-        (event.eventState == 'PREPARE' || event.eventState == 'FORM_START') ? (
-          <Button
-            onPress={() => {
-              dispatch(
-                ApplicationActions.onShowPopupSelection(
-                  t('cancel_event_popup_selection'),
-                  t('cancel'),
-                  t('confirm'),
-                  () => {},
-                  () => {
-                    unRegister();
-                  },
-                ),
-              );
-            }}>
-            {t('un_register')}
-          </Button>
-        ) : null}
-      </>
-    );
+    return null;
   };
 
   const renderMedia = media => {
@@ -146,7 +117,7 @@ export default function InformationTab(props) {
         style={[styles.lineInformation, {borderBottomColor: colors.border}]}
         key={title}>
         <Text body2 grayColor>
-          {t(title)}
+          {title}
         </Text>
         <View style={{flexDirection: 'column', alignItems: 'flex-end'}}>
           <Text body2 semibold accentColor>
@@ -177,7 +148,7 @@ export default function InformationTab(props) {
         {/* {renderMedia(event.media)} */}
 
         <Text key={key} title1 semibold numberOfLines={1} style={styles.text}>
-          {event.information.title}
+          Ôn thi cuối học kỳ 1
         </Text>
 
         {event.information.description ? (
@@ -195,50 +166,17 @@ export default function InformationTab(props) {
           </View>
         ) : null}
 
-        {renderField('participant_role', event.roleName)}
-        {renderField('received_social_day', event.suggestSocialDay)}
+        {renderField('Location', 'Trường Đại học Bách Khoa')}
         {renderField(
-          'unit_held',
-          event.information.unitHeld
-            ? event.information.unitHeld
-            : t('update_later'),
-        )}
-        {renderField(
-          'type',
+          'Type',
           event.information.type == 0
             ? t('normal')
             : event.information.type == 1
             ? t('chain')
             : t('other'),
         )}
-        {renderField(
-          'event_start',
-          event.information.eventStart
-            ? Utils.formatDate(event.information.eventStart)
-            : t('update_later'),
-          event.information.eventStart
-            ? Utils.formatTime(event.information.eventStart)
-            : '',
-        )}
-        {renderField(
-          'event_end',
-          event.information.eventEnd
-            ? Utils.formatDate(event.information.eventEnd)
-            : t('update_later'),
-          event.information.eventEnd
-            ? Utils.formatTime(event.information.eventEnd)
-            : '',
-        )}
-        {renderField(
-          'form_start',
-          Utils.formatDate(event.information.formStart),
-          Utils.formatTime(event.information.formStart),
-        )}
-        {renderField(
-          'form_close',
-          Utils.formatDate(event.information.formEnd),
-          Utils.formatTime(event.information.formEnd),
-        )}
+        {renderField('Starts at', '25/03/2023', '8:00 AM')}
+        {renderField('Ends at', '25/03/2023', '12:30 AM')}
 
         <View style={styles.contentContact}>
           <Text
@@ -247,23 +185,40 @@ export default function InformationTab(props) {
             style={{
               paddingBottom: 10,
             }}>
-            {t('contact')}
+            Members
           </Text>
         </View>
         <ProfileDetail
-          image={
-            //   {
-            //   uri: Utils.getMediaURL(event.userCreated.profilePicture.thumbnail),
-            // }
-            UserData[2].image
-          }
-          textFirst={event.userCreated.name}
-          textSecond="CREATOR"
-          textThird={event.userCreated.email}
+          image={Khoa}
+          textFirst={'Trần Ngọc Đăng Khoa'}
+          textSecond="Creator"
+          textThird={'khoa.tranngocdang@hcmut.edu.vn'}
           userId={event.userCreated._id}
-          onPress={() =>
-            navigation.navigate('ProfileView', {userInfo: event.userCreated})
-          }
+          onPress={() => navigation.navigate('Profile2')}
+        />
+        <ProfileDetail
+          image={Minh}
+          textFirst={'Trần Duy Minh'}
+          textSecond="Member"
+          textThird={'minh.tranduy@hcmut.edu.vn'}
+          userId={event.userCreated._id}
+          onPress={() => navigation.navigate('Profile2')}
+        />
+        <ProfileDetail
+          image={Hung}
+          textFirst={'Trương Quốc Hưng'}
+          textSecond="Member"
+          textThird={'hung.truongquoc@hcmut.edu.vn'}
+          userId={event.userCreated._id}
+          onPress={() => navigation.navigate('Profile2')}
+        />
+        <ProfileDetail
+          image={Khoi}
+          textFirst={'Nguyễn Trần Khôi'}
+          textSecond="Member"
+          textThird={'khoi.nguyentran@hcmut.edu.vn'}
+          userId={event.userCreated._id}
+          onPress={() => navigation.navigate('Profile2')}
         />
       </ScrollView>
 

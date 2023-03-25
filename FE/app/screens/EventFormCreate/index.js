@@ -24,7 +24,8 @@ import {channingActions} from '@utils';
 import {EventActions} from '@actions';
 import {useDispatch} from 'react-redux';
 import {ApplicationActions} from '@actions';
-// import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import Config from 'react-native-config';
 
 export default function EventFormCreate(props) {
   const {navigation} = props;
@@ -46,6 +47,7 @@ export default function EventFormCreate(props) {
   const [eventType, setEventType] = useState(0);
   const [urgent, setUrgent] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [activityType, setActivityType] = useState(0);
 
   /**
    * @description Call when reminder option switch on/off
@@ -88,26 +90,6 @@ export default function EventFormCreate(props) {
     setErrorMsg('');
     return true;
   };
-
-  // const GooglePlacesInput = () => {
-  //   return (
-  //     <GooglePlacesAutocomplete
-  //       placeholder="Search"
-  //       onPress={(data, details = null) => {
-  //         // 'details' is provided when fetchDetails = true
-  //         console.log('Change');
-  //         console.log(data, details);
-  //       }}
-  //       fetchDetails={true}
-  //       onFail={(err) => console.log(err)}
-  //       currentLocation={true}
-  //       query={{
-  //         key: 'AIzaSyCot56wWh3R96fs3l-SHLyCNS9Zv8SsrxU',
-  //         language: 'en',
-  //       }}
-  //     />
-  //   );
-  // };
 
   /**
    * @description Call when add Payment
@@ -191,7 +173,9 @@ export default function EventFormCreate(props) {
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}
         keyboardVerticalOffset={offsetKeyboard}
         style={{flex: 1}}>
-        <ScrollView contentContainerStyle={{padding: 20, paddingTop: 10}}>
+        <ScrollView
+          contentContainerStyle={{padding: 20, paddingTop: 10}}
+          keyboardShouldPersistTaps={'handled'}>
           <View>
             <Text body2>{t('title')}</Text>
             <TextInput
@@ -213,7 +197,7 @@ export default function EventFormCreate(props) {
               onChange={setEventTime}
             />
           </View>
-          <View style={{marginTop: 10}}>
+          {/* <View style={{marginTop: 10}}>
             <Text body2>{t('form_time')}</Text>
             <EventTime
               checkInTitle={t('form_start')}
@@ -224,11 +208,23 @@ export default function EventFormCreate(props) {
               checkOutTime={formEnd}
               onChange={setFormTime}
             />
+          </View> */}
+
+          {/* <View style={{marginTop: 10}}>
+            <EventTypeOption
+              label={t('type')}
+              option={[
+                {value: 0, text: 'Event'},
+                {value: 1, text: 'Study Session'},
+              ]}
+              onChange={value => setActivityType(value)}
+              value={activityType}
+            />
           </View>
 
           <View style={{marginTop: 10}}>
             <EventTypeOption
-              label={t('type')}
+              label={t('property')}
               option={[
                 {value: 0, text: 'General'},
                 {value: 1, text: 'Chain'},
@@ -236,9 +232,9 @@ export default function EventFormCreate(props) {
               onChange={value => setEventType(value)}
               value={eventType}
             />
-          </View>
+          </View> */}
 
-          <View style={{marginTop: 20}}>
+          {/* <View style={{marginTop: 20}}>
             <Text body2>{t('unit_held')}</Text>
             <TextInput
               onChangeText={text => setUnitHeld(text)}
@@ -246,7 +242,7 @@ export default function EventFormCreate(props) {
               success={true}
               value={unitHeld}
             />
-          </View>
+          </View> */}
 
           <View style={{marginTop: 10}}>
             <Text body2>{t('description')}</Text>
@@ -260,23 +256,54 @@ export default function EventFormCreate(props) {
             />
           </View>
 
-          <View style={[styles.checkDefault, {borderTopColor: colors.border}]}>
-            <Text body2>{t('urgent')}</Text>
-            <Switch
-              name="angle-right"
-              size={18}
-              onValueChange={toggleSwitch}
-              value={urgent}
+          <View style={{marginTop: 10}}>
+            <Text body2>Location</Text>
+            <GooglePlacesAutocomplete
+              placeholder="Search"
+              onPress={(data, details = null) => {
+                console.log('PLaces API test', data, details);
+              }}
+              minLength={5}
+              query={{
+                key: '',
+                language: 'vn',
+                components: 'country:vn',
+              }}
+              styles={{
+                textInputContainer: {
+                  backgroundColor: colors.card,
+                  height: 46,
+                  borderRadius: 5,
+                  width: '100%',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                },
+                textInput: {
+                  backgroundColor: colors.card,
+                  fontFamily: 'Raleway',
+                  flex: 1,
+                  // height: '100%',
+                  color: colors.text,
+                },
+              }}
+              fetchDetails={true}
+              onFail={err => console.log('ERROR', err)}
+            />
+          </View>
+          <View style={{marginTop: 10}}>
+            <Text body2>Maximum number of participants</Text>
+            <TextInput
+              onChangeText={text => setUnitHeld(text)}
+              placeholder={'Input member limit'}
+              success={true}
+              value={unitHeld}
             />
           </View>
         </ScrollView>
-        {/* <View style={{marginTop: 10, flex: 1}}>
-          <Text body2>Places</Text>
-          <GooglePlacesInput></GooglePlacesInput>
-        </View> */}
         <View style={{paddingVertical: 15, paddingHorizontal: 20}}>
           <Text style={{color: 'red'}}>{errorMsg}</Text>
-          <Button full onPress={() => onPress()}>
+          <Button full onPress={() => navigation.pop()}>
             {t('create')}
           </Button>
         </View>

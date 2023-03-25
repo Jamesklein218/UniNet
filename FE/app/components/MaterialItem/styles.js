@@ -4,6 +4,7 @@ import {BaseColor} from '@config';
 
 export default StyleSheet.create({
   //block css
+  imagePost: {width: '100%', height: Utils.scaleWithPixel(220)},
   blockImage: {
     height: Utils.scaleWithPixel(200),
     width: '100%',

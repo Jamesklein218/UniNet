@@ -40,7 +40,7 @@ export default function RegisterRole(props) {
               {!isAttendance ? (
                 <View style={styles.contentRate}>
                   <Text caption2 grayColor numberOfLines={1}>
-                    {t('social_day')} {reward}
+                    Max {reward}
                   </Text>
                 </View>
               ) : (

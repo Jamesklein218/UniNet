@@ -2,32 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Animated,
-  TouchableOpacity,
   FlatList,
   RefreshControl,
   ScrollView,
 } from 'react-native';
-import {
-  Image,
-  Text,
-  Icon,
-  HotelItem,
-  Card,
-  Button,
-  SafeAreaView,
-  EventCard,
-} from '@components';
+import {Text, SafeAreaView, EventCard} from '@components';
 import CustomCard from '../../components/CustomCard';
-import {BaseStyle, Images, useTheme} from '@config';
+import {Images, useTheme} from '@config';
 import * as Utils from '@utils';
 import styles from './styles';
-import {useTranslation} from 'react-i18next';
 import {useFocusEffect} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {EventActions} from '@actions';
 import messaging from '@react-native-firebase/messaging';
 import _ from 'lodash';
-import {PromotionData, PostData} from '@data';
+import {PostData} from '@data';
 import {AuthAPI} from '../../api/auth';
 import {ForumAPI} from '@api';
 import {GET_ALL_POST} from '../../actions/actionTypes';
@@ -49,27 +38,11 @@ export default function Home({navigation}) {
 
     void onAppBootstrap();
 
-    getWaitingEvent();
-
     return messaging().onTokenRefresh(async token => {
       const data = await AuthAPI.registerDeviceToken(token);
       await AuthAPI.registerUserToDeviceToken(data.payload);
     });
   }, []);
-
-  const getWaitingEvent = () => {
-    if (me?.role && _.find(me.role, item => item === 'CENSOR')) {
-      EventActions.getWaitingEvent()
-        .then(res => {
-          console.log('Get waiting event successful', res);
-          setwaitingEvent(res.data.payload);
-          console.log(res.data.payload[0]);
-        })
-        .catch(err => {
-          console.log('Error in get waiting event', err);
-        });
-    }
-  };
 
   let [icons] = useState([
     {
@@ -130,8 +103,20 @@ export default function Home({navigation}) {
       image: Images.chemistry,
     },
     {
+      title: 'Biology',
+      image: Images.biology,
+    },
+    {
+      title: 'Civil Engineer',
+      image: Images.civilEngineer,
+    },
+    {
       title: 'Management',
       image: Images.management,
+    },
+    {
+      title: 'Economics',
+      image: Images.economic,
     },
   ];
 
@@ -143,6 +128,22 @@ export default function Home({navigation}) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []),
   );
+
+  const isCensor = me?.role && _.find(me.role, item => item === 'CENSOR');
+
+  const getWaitingEvent = () => {
+    if (isCensor) {
+      EventActions.getWaitingEvent()
+        .then(res => {
+          console.log('Get waiting event successful', res);
+          setwaitingEvent(res.data.payload);
+          console.log(res.data.payload[0]);
+        })
+        .catch(err => {
+          console.log('Error in get waiting event', err);
+        });
+    }
+  };
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -162,6 +163,7 @@ export default function Home({navigation}) {
         })();
       }),
     );
+    getWaitingEvent();
   };
 
   return (
@@ -212,36 +214,93 @@ export default function Home({navigation}) {
             ListFooterComponent={
               <View style={{marginTop: 180}}>
                 <View>
-                  {/* Verify Event */}
+                  {isCensor && (
+                    <>
+                      <View style={styles.titleView}>
+                        <Text title3 semibold style={{fontSize: 18}}>
+                          Verify Activity (For Censor Only)
+                        </Text>
+                      </View>
+                      <FlatList
+                        contentContainerStyle={{
+                          paddingLeft: 5,
+                          paddingRight: 20,
+                        }}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        data={waitingEvent}
+                        keyExtractor={(item, index) => item.id}
+                        renderItem={({item, index}) => (
+                          <EventCard
+                            title={item.information.title}
+                            time={item.information.eventStart}
+                            onPress={() =>
+                              navigation.navigate('VerificationDetail', {
+                                event: item,
+                              })
+                            }
+                            style={{marginLeft: 15}}
+                            image={item.media.origin}
+                          />
+                        )}
+                      />
+                    </>
+                  )}
                   <View style={styles.titleView}>
                     <Text title3 semibold>
-                      Verify Event (For Censor Only)
+                      Popular
                     </Text>
                   </View>
                   <FlatList
                     contentContainerStyle={{paddingLeft: 5, paddingRight: 20}}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    data={waitingEvent}
+                    data={event.eventsNewfeed}
                     keyExtractor={(item, index) => item.id}
                     renderItem={({item, index}) => (
                       <EventCard
                         title={item.information.title}
-                        time={item.submitAt}
+                        time={item.information.eventStart}
                         onPress={() =>
-                          navigation.navigate('VerificationDetail', {
-                            event: item,
+                          navigation.navigate('EventDetail', {
+                            eventId: item._id,
+                            index: index,
                           })
                         }
                         style={{marginLeft: 15}}
-                        image={item.media.origin}
+                        image={Images[`event${(index % 7) + 1}`]}
                       />
                     )}
                   />
-                  {/* Up Coming Events */}
                   <View style={styles.titleView}>
                     <Text title3 semibold>
-                      Up Coming Events
+                      Today
+                    </Text>
+                  </View>
+                  <FlatList
+                    contentContainerStyle={{paddingLeft: 5, paddingRight: 20}}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    data={event.eventsNewfeed.slice(1)}
+                    keyExtractor={(item, index) => item.id}
+                    renderItem={({item, index}) => (
+                      <EventCard
+                        title={item.information.title}
+                        time={item.information.eventStart}
+                        onPress={() =>
+                          navigation.navigate('EventDetail', {
+                            eventId: item._id,
+                            index: index,
+                          })
+                        }
+                        style={{marginLeft: 15}}
+                        image={Images[`event${(index % 7) + 2}`]}
+                      />
+                    )}
+                  />
+                  <View style={styles.titleView}>
+                    <Text title3 semibold>
+                      This Week
                     </Text>
                   </View>
                   <FlatList
@@ -254,10 +313,6 @@ export default function Home({navigation}) {
                       <EventCard
                         title={item.information.title}
                         time={item.information.eventStart * 1000}
-                        description={item.information.description.substring(
-                          0,
-                          50,
-                        )}
                         onPress={() =>
                           navigation.navigate('EventDetail', {
                             eventId: item._id,
@@ -267,58 +322,6 @@ export default function Home({navigation}) {
                         style={{marginLeft: 15}}
                         image={Images[`event${(index % 7) + 1}`]}
                       />
-                    )}
-                  />
-                  {/* Popular Post */}
-                  <Text title3 semibold style={styles.titleView}>
-                    Popular Post
-                  </Text>
-                  <FlatList
-                    contentContainerStyle={{paddingLeft: 5, paddingRight: 20}}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    data={posts}
-                    keyExtractor={(item, index) => item.id}
-                    renderItem={({item, index}) => (
-                      <CustomCard
-                        style={[styles.promotionItem, {marginLeft: 15}]}
-                        image={PostData[index % PostData.length].image}
-                        onPress={() =>
-                          navigation.navigate('ForumDetail', {item, index})
-                        }>
-                        <Text subhead whiteColor>
-                          {`${item.content.substring(0, 20)}...`}
-                        </Text>
-                        <Text title2 whiteColor semibold>
-                          {item.title}
-                        </Text>
-                      </CustomCard>
-                    )}
-                  />
-                  {/* Popular Material */}
-                  <Text title3 semibold style={styles.titleView}>
-                    Search Your Material
-                  </Text>
-                  <FlatList
-                    contentContainerStyle={{paddingLeft: 5, paddingRight: 20}}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    data={materialList}
-                    keyExtractor={(item, index) => item.id}
-                    renderItem={({item, index}) => (
-                      <CustomCard
-                        image={item.image}
-                        style={[styles.tourItem, {marginLeft: 15}]}
-                        onPress={() => {}}>
-                        <View
-                          style={{
-                            background: colors.primary,
-                          }}>
-                          <Text headline whiteColor semibold>
-                            {item.title}
-                          </Text>
-                        </View>
-                      </CustomCard>
                     )}
                   />
                 </View>
