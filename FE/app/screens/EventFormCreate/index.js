@@ -265,7 +265,7 @@ export default function EventFormCreate(props) {
               }}
               minLength={5}
               query={{
-                key: 'AIzaSyAf4xjXI5tD6R-pm_iktNthXBDYeS3Gilw',
+                key: '',
                 language: 'vn',
                 components: 'country:vn',
               }}
@@ -300,20 +300,10 @@ export default function EventFormCreate(props) {
               value={unitHeld}
             />
           </View>
-
-          <View style={[styles.checkDefault, {borderTopColor: colors.border}]}>
-            <Text body2>{t('urgent')}</Text>
-            <Switch
-              name="angle-right"
-              size={18}
-              onValueChange={toggleSwitch}
-              value={urgent}
-            />
-          </View>
         </ScrollView>
         <View style={{paddingVertical: 15, paddingHorizontal: 20}}>
           <Text style={{color: 'red'}}>{errorMsg}</Text>
-          <Button full onPress={() => onPress()}>
+          <Button full onPress={() => navigation.pop()}>
             {t('create')}
           </Button>
         </View>

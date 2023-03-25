@@ -142,6 +142,7 @@ export default function Main() {
           <MainStack.Screen name="PostCreate" component={PostCreate} />
           <MainStack.Screen name="MaterialCreate" component={MaterialCreate} />
           <MainStack.Screen name="MaterialDetail" component={MaterialDetail} />
+          <MainStack.Screen name="Profile2" component={Profile} />
 
           <MainStack.Screen
             name="EventVerifiedActivity"
@@ -221,16 +222,6 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Profile"
         component={login ? Profile2 : Walkthrough}
-        options={{
-          title: t('account'),
-          tabBarIcon: ({color}) => {
-            return <Icon solid color={color} name="user-circle" size={20} />;
-          },
-        }}
-      />
-      <BottomTab.Screen
-        name="Profile2"
-        component={login ? Profile : Walkthrough}
         options={{
           title: t('account'),
           tabBarIcon: ({color}) => {
