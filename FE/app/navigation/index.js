@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {StatusBar, Platform, useColorScheme} from 'react-native';
+import messaging from '@react-native-firebase/messaging';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createStackNavigator,
@@ -25,6 +26,15 @@ export default function Navigator() {
   const {theme, colors} = useTheme();
   const isDarkMode = useColorScheme() === 'dark';
   const dispatch = useDispatch();
+  const ref = React.useRef(null);
+
+  useEffect(() => {
+    messaging().onNotificationOpenedApp(({data}) => {
+      if (data && data.type && ref) {
+        ref.current?.navigate(data.type);
+      }
+    });
+  }, []);
 
   /**
    * init language
@@ -58,7 +68,7 @@ export default function Navigator() {
   }, [colors.primary, isDarkMode]);
 
   return (
-    <NavigationContainer theme={theme}>
+    <NavigationContainer ref={ref} theme={theme}>
       <RootStack.Navigator
         screenOptions={{
           headerShown: false,

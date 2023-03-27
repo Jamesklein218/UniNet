@@ -132,32 +132,6 @@ export default function ForumDetail(props) {
             {/* Comment */}
             <CommentSection key={post._id} postId={post._id} />
             {/* Featured Posts */}
-            <Text
-              headline
-              semibold
-              style={{
-                marginTop: 20,
-              }}>
-              {t('feature_post')}
-            </Text>
-            <PostListItem
-              title="See The Unmatched"
-              description="Diffie on Friday announced he had contracted the coronavirus, becoming the first country star to go public with such a diagnosis."
-              style={{marginTop: 10, width: '100%'}}
-              image={Images.trip9}
-              onPress={() => {
-                navigation.navigate('Post');
-              }}
-            />
-            <PostListItem
-              description="Diffie on Friday announced he had contracted the coronavirus, becoming the first country star to go public with such a diagnosis."
-              title="Top 15 Things Must To Do"
-              style={{marginTop: 10, width: '100%'}}
-              image={Images.trip8}
-              onPress={() => {
-                navigation.navigate('Post');
-              }}
-            />
           </View>
         </ScrollView>
       </SafeAreaView>

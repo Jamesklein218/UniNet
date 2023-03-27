@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {BaseColor, useTheme, useFont} from '@config';
 import {useTranslation} from 'react-i18next';
+import messaging from '@react-native-firebase/messaging';
 import {Icon} from '@components';
 import Community from '@screens/Community';
 import Notification from '@screens/Notification';
@@ -27,6 +28,7 @@ import MaterialDetail from '@screens/MaterialDetail';
 import Home from '@screens/Home';
 import Booking from '@screens/Booking';
 import Profile from '@screens/Profile';
+import Profile2 from '@screens/Profile2';
 import EventVerifiedActivity from '@screens/EventVerifiedActivity';
 import EventCreatedActivity from '@screens/EventCreatedActivity';
 import EventParticipatedActivity from '@screens/EventParticipatedActivity';
@@ -43,6 +45,8 @@ import EventDetailConfirm from '@screens/EventDetailConfirm';
 import ParticipantAdd from '@screens/ParticipantAdd';
 import PDFList from '@screens/PDFList';
 import PDF from '@screens/PDF';
+import {useNavigation} from '@react-navigation/native';
+import * as actionTypes from '@actions/actionTypes';
 
 const MainStack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -50,13 +54,41 @@ const BottomTab = createBottomTabNavigator();
 export default function Main() {
   const auth = useSelector(state => state.auth);
   const login = auth.login.success;
+  const navigation = useNavigation();
+  const [initialRoute, setInitialRoute] = useState('BottomTabNavigator');
+
+  const {eventId, index} = useSelector(state => state.notification);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    messaging().onNotificationOpenedApp(({data}) => {
+      if (login && data && data.type && navigation) {
+        navigation.navigate(data.type, {eventId: data.eventId, index: 0});
+      }
+    });
+
+    messaging().getInitialNotification(({data}) => {
+      if (login && data && data.type) {
+        setInitialRoute(data.type);
+        dispatch({
+          type: actionTypes.CHANGE_NOTI_EVENTID,
+          payload: data.eventId,
+        });
+        dispatch({
+          type: actionTypes.CHANGE_NOTI_INDEX,
+          payload: 0,
+        });
+      }
+    });
+  }, [navigation, login, dispatch]);
 
   return (
     <MainStack.Navigator
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName={login ? 'BottomTabNavigator' : 'Walkthrough'}>
+      initialRouteName={login ? initialRoute : 'Walkthrough'}>
       {login ? (
         <>
           <MainStack.Screen
@@ -110,6 +142,7 @@ export default function Main() {
           <MainStack.Screen name="PostCreate" component={PostCreate} />
           <MainStack.Screen name="MaterialCreate" component={MaterialCreate} />
           <MainStack.Screen name="MaterialDetail" component={MaterialDetail} />
+          <MainStack.Screen name="Profile2" component={Profile} />
 
           <MainStack.Screen
             name="EventVerifiedActivity"
@@ -151,7 +184,7 @@ function BottomTabNavigator() {
         tabBarActiveTintColor: colors.primary,
         headerShown: false,
         tabBarLabelStyle: {
-          fontSize: 12,
+          fontSize: 10,
           fontFamily: font,
           paddingBottom: 2,
         },
@@ -170,19 +203,9 @@ function BottomTabNavigator() {
         name="Booking"
         component={Booking}
         options={{
-          title: t('Event'),
+          title: t('activity'),
           tabBarIcon: ({color}) => {
             return <Icon color={color} name="bookmark" size={20} solid />;
-          },
-        }}
-      />
-      <BottomTab.Screen
-        name="Community"
-        component={Community}
-        options={{
-          title: t('Community'),
-          tabBarIcon: ({color}) => {
-            return <Icon color={color} name="globe-asia" size={20} solid />;
           },
         }}
       />
@@ -198,7 +221,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Profile"
-        component={login ? Profile : Walkthrough}
+        component={login ? Profile2 : Walkthrough}
         options={{
           title: t('account'),
           tabBarIcon: ({color}) => {

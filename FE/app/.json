@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "address_components": [
+        {
+          "long_name": "Bach Khoa",
+          "short_name": "Bach Khoa",
+          "types": [
+            "political",
+            "sublocality",
+            "sublocality_level_1"
+          ]
+        },
+        {
+          "long_name": "Hai Bà Trưng District",
+          "short_name": "Hai Bà Trưng District",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Hanoi",
+          "short_name": "Hanoi",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Vietnam",
+          "short_name": "VN",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Bach Khoa, Hai Bà Trưng District, Hanoi, Vietnam",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 21.0084204,
+            "lng": 105.8504175
+          },
+          "southwest": {
+            "lat": 21.0001272,
+            "lng": 105.8413625
+          }
+        },
+        "location": {
+          "lat": 21.0042694,
+          "lng": 105.8459098
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 21.0084204,
+            "lng": 105.8504175
+          },
+          "southwest": {
+            "lat": 21.0001272,
+            "lng": 105.8413625
+          }
+        }
+      },
+      "place_id": "ChIJvRr-j3asNTERKo7A8bw2sSI",
+      "types": [
+        "political",
+        "sublocality",
+        "sublocality_level_1"
+      ]
+    }
+  ],
+  "status": "OK"
+}
